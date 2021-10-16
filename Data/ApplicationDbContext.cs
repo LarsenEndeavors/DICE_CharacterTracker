@@ -16,6 +16,7 @@ namespace DICE_CharacterTracker.Data
             DbContextOptions options,
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
+            
         }
     }
 }

@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd
+    http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.4.xsd ">
+    
+    <changeSet id="user_init_0" author="nLarsen">
+        <createTable tableName="AspNetRoles">
+            <column name="Id" type="varchar(256)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="Name" type="varchar(256)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="NormalizedName" type="varchar(256)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="ConcurrencyStamp" type="varchar(256)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="AspNetUsers">
+            <column name="Id" type="varchar(256)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="UserName" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NormalizedUserName" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Email" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NormalizedEmail" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EmailConfirmed" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PasswordHash" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SecurityStamp" type="varchar(256)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="ConcurrencyStamp" type="varchar(256)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="PhoneNumber" type="varchar(256)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="PhoneNumberConfirmed" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TwoFactorEnabled" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LockoutEnd" type="datetime">
+                <constraints nullable="true"/>
+            </column>
+            <column name="LockoutEnabled" type="boolean">
+                <constraints nullable="true"/>
+            </column>
+            <column name="AccessFailedCount" type="int">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="DeviceCodes">
+            <column name="UserCode" type="varchar(200)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="DeviceCode" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SubjectId" type="varchar(200)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="ClientId" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CreationTime" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Expiration" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Data" type="clob(50000)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="PersistedGrants">
+            <column name="Key" type="varchar(200)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="Type" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SubjectId" type="varchar(200)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="ClientId" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CreationTime" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Expiration" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Data" type="clob(50000)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="AspNetRoleClaims">
+            <column name="Id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="RoleId" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ClaimType" type="varchar(256)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="ClaimValue" type="varchar(256)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="AspNetUserClaims">
+            <column name="Id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="UserId" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ClaimType" type="varchar(256)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="ClaimValue" type="varchar(256)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="AspNetUserLogins">
+            <column name="LoginProvider" type="varchar(128)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="ProviderKey" type="varchar(128)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="ProviderDisplayName" type="varchar(256)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="UserId" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="AspNetUserRoles">
+            <column name="RoleId" type="varchar(256)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="UserId" type="varchar(256)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="AspNetUserTokens">
+            <column name="UserId" type="varchar(256)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="LoginProvider" type="varchar(128)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="Name" type="varchar(128)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="Value" type="varchar(128)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="user_init_1" author="nLarsen">
+        <addForeignKeyConstraint baseTableName="AspNetRoleClaims" baseColumnNames="RoleId" constraintName="FK_AspNetRoleClaims_AspNetRoles_RoleId"
+                                 referencedTableName="AspNetRoles"
+                                 referencedColumnNames="Id" deleteCascade="true"/>
+        <addForeignKeyConstraint baseTableName="AspNetUserClaims" baseColumnNames="UserId" constraintName="FK_AspNetUserClaims_AspNetUsers_UserId"
+                                 referencedTableName="AspNetUsers"
+                                 referencedColumnNames="Id" deleteCascade="true"/>
+        <addForeignKeyConstraint baseTableName="AspNetUserLogins" baseColumnNames="UserId" constraintName="FK_AspNetUserLogins_AspNetUsers_UserId"
+                                 referencedTableName="AspNetUsers"
+                                 referencedColumnNames="Id" deleteCascade="true"/>
+        <addForeignKeyConstraint baseTableName="AspNetUserRoles" baseColumnNames="RoleId" constraintName="FK_AspNetUserRoles_AspNetRoles_RoleId"
+                                 referencedTableName="AspNetRoles"
+                                 referencedColumnNames="Id" deleteCascade="true"/>
+        <addForeignKeyConstraint baseTableName="AspNetUserRoles" baseColumnNames="UserId" constraintName="FK_AspNetUserRoles_AspNetUsers_UserId"
+                                 referencedTableName="AspNetUsers"
+                                 referencedColumnNames="Id" deleteCascade="true"/>
+        <addForeignKeyConstraint baseTableName="AspNetUserTokens" baseColumnNames="UserId" constraintName="FK_AspNetUserTokens_AspNetUsers_UserId"
+                                 referencedTableName="AspNetUsers"
+                                 referencedColumnNames="Id" deleteCascade="true"/>
+    </changeSet>
+
+    <changeSet id="user_init_2" author="nLarsen">
+        <createIndex tableName="AspNetRoleClaims" indexName="IX_AspNetRoleClaims_RoleId">
+            <column name="RoleId"/>
+        </createIndex>
+        <createIndex tableName="AspNetRoles" indexName="RoleNameIndex" unique="true">
+            <column name="Name"/>
+        </createIndex>
+        <createIndex tableName="AspNetUserClaims" indexName="IX_AspNetUserClaims_UserId">
+            <column name="UserId"/>
+        </createIndex>
+        <createIndex tableName="AspNetUserLogins" indexName="IX_AspNetUserLogins_UserId">
+            <column name="UserId"/>
+        </createIndex>
+        <createIndex tableName="AspNetUsers" indexName="EmailIndex">
+            <column name="Email"/>
+        </createIndex>
+        <createIndex tableName="AspNetUsers" indexName="UserNameIndex" unique="true">
+            <column name="UserName"/>
+        </createIndex>
+        <createIndex tableName="DeviceCodes" indexName="IX_DeviceCodes_DeviceCode" unique="true">
+            <column name="DeviceCode"/>
+        </createIndex>
+        <createIndex tableName="DeviceCodes" indexName="IX_DeviceCodes_Expiration">
+            <column name="Expiration"/>
+        </createIndex>
+        <createIndex tableName="PersistedGrants" indexName="IX_PersistedGrants_Expiration" unique="true">
+            <column name="Expiration"/>
+        </createIndex>
+        <createIndex tableName="PersistedGrants" indexName="IX_PersistedGrants_SubjectId_ClientId_Type" unique="true">
+            <column name="SubjectId"/>
+            <column name="ClientId"/>
+            <column name="Type"/>
+        </createIndex>
+    </changeSet>
+    
+</databaseChangeLog>
