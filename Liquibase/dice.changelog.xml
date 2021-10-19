@@ -6,7 +6,8 @@
         xmlns:pro="http://www.liquibase.org/xml/ns/pro"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd
     http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.4.xsd ">
-    
+
     <include file="./ChangeSets/userInitialize.xml" author="nLarsen" relativeToChangelogFile="true"/>
+    <include file="./ChangeSets/gameSheetInitialize.xml" author="nLarsen" relativeToChangelogFile="true"/>
     
 </databaseChangeLog>
