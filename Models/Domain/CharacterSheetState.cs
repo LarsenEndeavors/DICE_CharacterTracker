@@ -1,17 +1,22 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DICE_CharacterTracker.Models.Domain
 {
     public class CharacterSheetState
     {
-        private int Id { get; set; }
-        private int CharacterId { get; set; }
-        private Character Character { get; set; }
-        private int CharacterSheetTemplateId { get; set; }
-        private CharacterSheetTemplate CharacterSheetTemplate { get; set; }
-        private DateTime StateCreated { get; set; }
-        private DateTime StateUpdated { get; set; }
-        private string CreatedBy { get; set; }
-        private string UpdatedBy { get; set; }
+        [Key]
+        public int Id { get; set; }
+        [ForeignKey("Character")]
+        public int CharacterId { get; set; }
+        public Character Character { get; set; }
+        [ForeignKey("CharacterSheetTemplate")]
+        public int CharacterSheetTemplateId { get; set; }
+        public CharacterSheetTemplate CharacterSheetTemplate { get; set; }
+        public DateTime StateCreated { get; set; }
+        public DateTime StateUpdated { get; set; }
+        public string CreatedBy { get; set; }
+        public string UpdatedBy { get; set; }
     }
 }

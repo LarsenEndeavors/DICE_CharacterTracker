@@ -1,12 +1,9 @@
 ﻿using DICE_CharacterTracker.Models;
+using DICE_CharacterTracker.Models.Domain;
 using IdentityServer4.EntityFramework.Options;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DICE_CharacterTracker.Data
 {
@@ -18,5 +15,20 @@ namespace DICE_CharacterTracker.Data
         {
             
         }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Entity<CharacterSheetStateField>()
+                .HasKey(c => new { c.CharacterSheetStateId, c.CharacterSheetTemplateFieldId });
+        }
+
+        public DbSet<Character> Characters { get; set; }
+        public DbSet<CharacterSheetState> CharacterSheetStates { get; set; }
+        public DbSet<CharacterSheetStateField> CharacterSheetStateFields { get; set; }
+        public DbSet<CharacterSheetTemplate> CharacterSheetTemplates { get; set; }
+        public DbSet<CharacterSheetTemplateField> CharacterSheetTemplateFieldss { get; set; }
+        public DbSet<Game> Games { get; set; }
+        
     }
 }

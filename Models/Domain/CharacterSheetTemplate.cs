@@ -1,10 +1,15 @@
-﻿namespace DICE_CharacterTracker.Models.Domain
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace DICE_CharacterTracker.Models.Domain
 {
     public class CharacterSheetTemplate
     {
-        private int Id { get; set; }
-        private int GameId { get; set; }
-        private Game Game { get; set; }
-        private string Name { get; set; }
+        [Key]
+        public int Id { get; set; }
+        [ForeignKey("Game")]
+        public int GameId { get; set; }
+        public Game Game { get; set; }
+        public string Name { get; set; }
     }
 }
