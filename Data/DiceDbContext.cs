@@ -7,13 +7,12 @@ using Microsoft.Extensions.Options;
 
 namespace DICE_CharacterTracker.Data
 {
-    public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
+    public class DiceDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {
-        public ApplicationDbContext(
+        public DiceDbContext(
             DbContextOptions options,
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
-            
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
