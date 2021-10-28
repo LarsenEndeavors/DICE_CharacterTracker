@@ -7,11 +7,10 @@ namespace DICE_CharacterTracker.Models.Domain
     {
         [Key]
         [Column(Order = 0)]
+        public int Id { get; set; }
         [ForeignKey("CharacterSheetState")]
         public int CharacterSheetStateId { get; set; }
         public CharacterSheetState CharacterSheetState { get; set; }
-        [Key]
-        [Column(Order = 1)]
         [ForeignKey("CharacterSheetTemplateField")]
         public int CharacterSheetTemplateFieldId { get; set; }
         public CharacterSheetTemplateField CharacterSheetTemplateField { get; set; }

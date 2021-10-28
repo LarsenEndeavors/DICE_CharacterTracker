@@ -75,11 +75,14 @@
             </column>
         </createTable>
         <createTable tableName="CharacterSheetStateFields">
+            <column name="Id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" />
+            </column>
             <column name="CharacterSheetStateId" type="int">
-                <constraints primaryKey="true"/>
+                <constraints nullable="false"/>
             </column>
             <column name="CharacterSheetTemplateFieldId" type="int">
-                <constraints primaryKey="true"/>
+                <constraints nullable="false"/>
             </column>
             <column name="Value" type="clob(50000)">
                 <constraints nullable="true"/>
