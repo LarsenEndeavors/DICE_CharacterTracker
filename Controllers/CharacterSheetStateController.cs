@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using DICE_CharacterTracker.Data;
 using DICE_CharacterTracker.Models.Domain;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace DICE_CharacterTracker.Controllers
 {
@@ -17,38 +19,44 @@ namespace DICE_CharacterTracker.Controllers
 
         // Create
 
-        public CharacterSheetState CreateCharacterSheetState(CharacterSheetState newCharacterSheetState)
+        public Task<ActionResult<CharacterSheetState>> CreateCharacterSheetState(CharacterSheetState newCharacterSheetState)
         {
             throw new NotImplementedException();
         }
         
         // Read
 
-        public List<CharacterSheetState> GetAllCharacterSheetStates()
+        public Task<ActionResult<List<CharacterSheetState>>> GetAllCharacterSheetStates()
         {
             throw new NotImplementedException();
         }
 
-        public List<CharacterSheetState> GetCharacterSheetStatesForCharacterId(int characterId)
+        public Task<ActionResult<List<CharacterSheetState>>> GetCharacterSheetStatesForCharacterId(int characterId)
         {
             throw new NotImplementedException();
         }
 
-        public CharacterSheetState GetCharacterSheetState(int id)
+        public async Task<ActionResult<CharacterSheetState>> GetCharacterSheetState(int id)
         {
-            throw new NotImplementedException();
+            var characterSheetState = await _dbContext.CharacterSheetStates.FindAsync(id);
+            if (characterSheetState == null)
+            {
+                return NotFound();
+            }
+
+            return characterSheetState;
         }
         
         // Update
 
-        public CharacterSheetState UpdateCharacterSheetState(CharacterSheetState characterSheetState)
+        public Task<IActionResult> UpdateCharacterSheetState(CharacterSheetState characterSheetState)
         {
             throw new NotImplementedException();
         }
         
         // Delete
 
-        public CharacterSheetState DeleteCharacterSheetState(int id)
+        public Task<ActionResult<CharacterSheetState>> DeleteCharacterSheetState(int id)
         {
             throw new NotImplementedException();
         }

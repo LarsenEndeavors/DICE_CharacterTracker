@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Data.Entity;
 using DICE_CharacterTracker.Data;
 using DICE_CharacterTracker.Models.Domain;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace DICE_CharacterTracker.Controllers
 {
@@ -29,11 +33,22 @@ namespace DICE_CharacterTracker.Controllers
             throw new NotImplementedException();
         }
 
-        public List<Character> GetCharactersForUserId(int id)
+        // GET: api/Character/user/5
+        [HttpGet("api/Character/user/{id}")]
+        public async Task<ActionResult<List<Character>>> GetCharactersForUserId(string id)
         {
-            throw new NotImplementedException();
+            var characters = await _dbContext.Characters.Where(character => character.UserId == id).ToListAsync();
+
+            if (!characters.Any())
+            {
+                return NotFound();
+            }
+
+            return characters;
         }
 
+        // GET: api/Character/5
+        [HttpGet("{id:int}")]
         public Character GetCharacterById(int id)
         {
             throw new NotImplementedException();
