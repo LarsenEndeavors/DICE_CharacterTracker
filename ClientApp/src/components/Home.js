@@ -1,18 +1,9 @@
 import React, { useState } from 'react';
+import {CharacterContainer} from "./Character/Container/CharacterContainer";
 
 const Home = () => {
-    const [name, setName] = useState("");
-
-    const handleNameChange = ({target}) => {
-        setName(target.value);
-    }
-
     return (
-        <div>
-            <label htmlFor={"name"} />
-            <input id={"name"} name={"name"} value={name} type={"text"} onChange={handleNameChange}/>
-            <p>{name}</p>
-        </div>
+        <CharacterContainer />
     )
 }
 export default Home;
