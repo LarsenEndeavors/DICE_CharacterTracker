@@ -1,9 +1,14 @@
-﻿namespace DICE_CharacterTracker.Models.Domain
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace DICE_CharacterTracker.Models.Domain
 {
     public class CharacterSheetTemplateField
     {
-        private int Id { get; set; }
-        private int CharacterSheetTemplateId { get; set; }
-        private CharacterSheetTemplate CharacterSheetTemplate { get; set; }
+        [Key]
+        public int Id { get; set; }
+        [ForeignKey("CharacterSheetTemplate")]
+        public int CharacterSheetTemplateId { get; set; }
+        public CharacterSheetTemplate CharacterSheetTemplate { get; set; }
     }
 }

@@ -1,12 +1,19 @@
-﻿namespace DICE_CharacterTracker.Models.Domain
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace DICE_CharacterTracker.Models.Domain
 {
     public class Character
     {
-        private int Id { get; set; }
-        private int GameId { get; set; }
-        private Game Game { get; set; }
-        private string Name { get; set; }
-        private string UserId { get; set; }
-        private ApplicationUser User { get; set; }
+        [Key]
+        public int Id { get; set; }
+        [ForeignKey("Game")]
+        public int GameId { get; set; }
+        public Game Game { get; set; }
+        public string Name { get; set; }
+        [ForeignKey("User")]
+        public string UserId { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }
