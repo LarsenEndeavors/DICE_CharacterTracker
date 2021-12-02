@@ -1,9 +1,26 @@
 ﻿FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
+RUN apt-get update \
+        && apt-get -y upgrade \
+        && apt-get -y dist-upgrade \
+        && apt-get install -y gnupg \
+        && apt-get install -y sudo \
+        && curl -sL deb.nodesource.com/setup_14.x | sudo -E bash - \
+        && apt-get install -y nodejs
+
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
+
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
+RUN apt-get update \
+    && apt-get -y upgrade \
+    && apt-get -y dist-upgrade \
+    && apt-get install -y gnupg \
+    && apt-get install -y sudo \
+    && curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - \
+    && apt-get install -y nodejs
+    
 WORKDIR /src
 COPY ["DICE_CharacterTracker.csproj", "./"]
 RUN dotnet restore "DICE_CharacterTracker.csproj"

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import {CharacterContainer} from "./Character/Container/CharacterContainer";
+import {UserContainer} from "./Character/Container/UserContainer";
 
 const Home = () => {
     return (
-        <CharacterContainer />
+        <UserContainer />
     )
 }
 export default Home;

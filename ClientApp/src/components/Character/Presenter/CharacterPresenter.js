@@ -1,7 +1,10 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
+import CharacterSelection from "./CharacterSelection";
 
 export const CharacterPresenter = (props) => {
     const [newCharacterName, setNewCharacterName] = useState("");
+    const [characters, setCharacters] = useState([]);
+    
     const handleNameChange = ({target}) => {
         setNewCharacterName(target.value);
     }
@@ -11,12 +14,23 @@ export const CharacterPresenter = (props) => {
         setShowNewCharacter(prevState => !prevState);
     }
     
-    const addCharacter = () => {
-        let newCharacter = newCharacterName;
+    const addCharacter = (newCharacterName) => {
         setNewCharacterName("");
         setShowNewCharacter(false);
-        props.addCharacter({name: newCharacter, id: crypto.randomUUID()});
+        let additionalCharacter = {name: newCharacterName, id: crypto.randomUUID(), characterSheets: []};
+        setCharacters([...characters, additionalCharacter]);
     }
+    
+    const fetchCharacters = async () => {
+        const response = await fetch("/api/Character/user/f5f3fc04-3389-4911-8550-e9014a185127");
+        const data = await response.json();
+        console.log(data);
+        setCharacters(data);
+    }
+    
+    useEffect(() => {
+        fetchCharacters();
+    }, [])
     
     return (
         <div>
@@ -30,12 +44,9 @@ export const CharacterPresenter = (props) => {
                     </button>
                 </>
             )}
-            {props.characters.map((character) => {
+            {characters.map((character) => {
                 return (
-                    <>
-                        <p>Name: {character.name}</p>
-                        <p>Id: {character.id}</p>
-                    </>
+                    <CharacterSelection character={character}/>
                 );
             })}
         </div>
