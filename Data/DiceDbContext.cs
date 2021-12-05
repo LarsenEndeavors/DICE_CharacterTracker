@@ -15,16 +15,9 @@ namespace DICE_CharacterTracker.Data
         {
         }
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            base.OnModelCreating(builder);
-            builder.Entity<CharacterSheetStateField>()
-                .HasKey(c => new { c.CharacterSheetStateId, c.CharacterSheetTemplateFieldId });
-        }
-
         public DbSet<Character> Characters { get; set; }
         public DbSet<CharacterSheetState> CharacterSheetStates { get; set; }
-        public DbSet<CharacterSheetStateField> CharacterSheetStateFields { get; set; }
+        public DbSet<CharacterSheetStateFieldValue> CharacterSheetStateFields { get; set; }
         public DbSet<CharacterSheetTemplate> CharacterSheetTemplates { get; set; }
         public DbSet<CharacterSheetTemplateField> CharacterSheetTemplateFieldss { get; set; }
         public DbSet<Game> Games { get; set; }

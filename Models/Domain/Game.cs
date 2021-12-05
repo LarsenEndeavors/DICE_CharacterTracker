@@ -2,6 +2,7 @@
 
 namespace DICE_CharacterTracker.Models.Domain
 {
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class Game
     {
         [Key]

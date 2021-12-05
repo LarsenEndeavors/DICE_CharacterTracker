@@ -3,7 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DICE_CharacterTracker.Models.Domain
 {
-    public class CharacterSheetStateField
+    // ReSharper disable once ClassNeverInstantiated.Global
+    public class CharacterSheetStateFieldValue
     {
         [Key]
         [Column(Order = 0)]
@@ -11,9 +12,7 @@ namespace DICE_CharacterTracker.Models.Domain
         [ForeignKey("CharacterSheetState")]
         public int CharacterSheetStateId { get; set; }
         public CharacterSheetState CharacterSheetState { get; set; }
-        [ForeignKey("CharacterSheetTemplateField")]
-        public int CharacterSheetTemplateFieldId { get; set; }
-        public CharacterSheetTemplateField CharacterSheetTemplateField { get; set; }
+        public string Name { get; set; }
         public string Value { get; set; }
     }
 }

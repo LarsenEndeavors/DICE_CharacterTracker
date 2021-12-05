@@ -6,7 +6,7 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd
     http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.4.xsd ">
     
-    <changeSet id="enhancement_2_00" author="nLarsen">
+    <changeSet id="character_and_character_sheet_initialization_0" author="nLarsen">
         <createTable tableName="Games">
             <column name="Id" type="int" autoIncrement="true">
                 <constraints primaryKey="true"/>
@@ -29,20 +29,9 @@
                 <constraints nullable="false" />
             </column>
         </createTable>
-        <createTable tableName="CharacterSheetTemplateFields">
-            <column name="Id" type="int" autoIncrement="true">
-                <constraints primaryKey="true"/>
-            </column>
-            <column name="CharacterSheetTemplateId" type="int">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
         <createTable tableName="Characters">
             <column name="Id" type="int" autoIncrement="true">
                 <constraints primaryKey="true"/>
-            </column>
-            <column name="GameId" type="int">
-                <constraints nullable="false"/>
             </column>
             <column name="Name" type="varchar(256)">
                 <constraints nullable="false"/>
@@ -61,6 +50,9 @@
             <column name="CharacterSheetTemplateId" type="int">
                 <constraints nullable="false"/>
             </column>
+            <column name="Name" type="varchar(256)">
+                <constraints nullable="true"/>
+            </column>
             <column name="StateCreated" type="datetime">
                 <constraints nullable="false"/>
             </column>
@@ -74,14 +66,14 @@
                 <constraints nullable="true"/>
             </column>
         </createTable>
-        <createTable tableName="CharacterSheetStateFields">
+        <createTable tableName="CharacterSheetStateFieldValues">
             <column name="Id" type="int" autoIncrement="true">
                 <constraints primaryKey="true" />
             </column>
             <column name="CharacterSheetStateId" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="CharacterSheetTemplateFieldId" type="int">
+            <column name="Name" type="varchar(1024)">
                 <constraints nullable="false"/>
             </column>
             <column name="Value" type="clob(50000)">
@@ -90,19 +82,7 @@
         </createTable>
     </changeSet>
     
-    <changeSet id="enhancement_2_01" author="nLarsen">
-        <addForeignKeyConstraint baseTableName="CharacterSheetTemplates" baseColumnNames="GameId"
-                                 constraintName="FK_CharacterSheetTemplates_GameId_Games_Id"
-                                 referencedTableName="Games"
-                                 referencedColumnNames="Id"/>
-        <addForeignKeyConstraint baseTableName="CharacterSheetTemplateFields" baseColumnNames="CharacterSheetTemplateId"
-                                 constraintName="FK_CharacterSheetTemplateFields_CharacterSheetTemplateId_CharacterSheetTemplates_Id"
-                                 referencedTableName="CharacterSheetTemplates"
-                                 referencedColumnNames="Id"/>
-        <addForeignKeyConstraint baseTableName="Characters" baseColumnNames="GameId"
-                                 constraintName="FK_Characters_GameId_Games_Id" 
-                                 referencedTableName="Games"
-                                 referencedColumnNames="Id"/>
+    <changeSet id="character_and_character_sheet_initialization_1" author="nLarsen">
         <addForeignKeyConstraint baseTableName="Characters" baseColumnNames="UserId"
                                  constraintName="FK_Characters_UserId_AspNetUsers_Id"
                                  referencedTableName="AspNetUsers"
@@ -115,19 +95,28 @@
                                  constraintName="FK_CharacterSheetStates_CharacterSheetTemplateId_CharacterSheetTemplates_Id"
                                  referencedTableName="CharacterSheetTemplates"
                                  referencedColumnNames="Id"/>
-        <addForeignKeyConstraint baseTableName="CharacterSheetStateFields" baseColumnNames="CharacterSheetStateId"
+        <addForeignKeyConstraint baseTableName="CharacterSheetStates" baseColumnNames="CreatedBy"
+                                 constraintName="FK_CharacterSheetStatesCreatedBy_AspNetUsers_Id"
+                                 referencedTableName="AspNetUsers"
+                                 referencedColumnNames="Id"/>
+        <addForeignKeyConstraint baseTableName="CharacterSheetStates" baseColumnNames="UpdatedBy"
+                                 constraintName="FK_CharacterSheetStatesUpdatedBy_AspNetUsers_Id"
+                                 referencedTableName="AspNetUsers"
+                                 referencedColumnNames="Id"/>
+        <addForeignKeyConstraint baseTableName="CharacterSheetTemplates" baseColumnNames="GameId"
+                                 constraintName="FK_CharacterSheetTemplates_GameId_Games_Id"
+                                 referencedTableName="Games"
+                                 referencedColumnNames="Id"/>
+        <addForeignKeyConstraint baseTableName="CharacterSheetStateFieldValues" baseColumnNames="CharacterSheetStateId"
                                  constraintName="FK_CharacterSheetStateFields_CharacterSheetStateId_CharacterSheetStates_Id"
                                  referencedTableName="CharacterSheetStates"
                                  referencedColumnNames="Id"/>
-        <addForeignKeyConstraint baseTableName="CharacterSheetStateFields" baseColumnNames="CharacterSheetTemplateFieldId"
-                                 constraintName="FK_CharacterSheetStateFields_CharacterSheetTemplateFieldId_CharacterSheetTemplateFields_Id"
-                                 referencedTableName="CharacterSheetTemplateFields"
-                                 referencedColumnNames="Id"/>
     </changeSet>
-    <changeSet id="enhancement_2_03" author="nLarsen">
-        <createIndex tableName="CharacterSheetStateFields" indexName="IX_CharacterSheetStateFields_CharacterSheetTemplateFieldId">
+    <changeSet id="character_and_character_sheet_initialization_2" author="nLarsen">
+        <createIndex tableName="CharacterSheetStateFieldValues" indexName="IX_CharacterSheetStateFields_CharacterSheetTemplateFieldId">
             <column name="CharacterSheetStateId"/>
-            <column name="CharacterSheetTemplateFieldId"/>
+            <column name="Name"/>
+            <column name="Value"/>
         </createIndex>
         <createIndex tableName="CharacterSheetStates" indexName="IX_CharacterSheetStates_StateCreated">
             <column name="StateCreated" type="datetime"/>

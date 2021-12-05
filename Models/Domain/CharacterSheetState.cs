@@ -15,7 +15,7 @@ namespace DICE_CharacterTracker.Models.Domain
         [ForeignKey("CharacterSheetTemplate")]
         public int CharacterSheetTemplateId { get; set; }
         public CharacterSheetTemplate CharacterSheetTemplate { get; set; }
-        public List<CharacterSheetStateField> CharacterSheetStateFields { get; set; }
+        public string Name { get; set; }
         public DateTime StateCreated { get; set; }
         public DateTime StateUpdated { get; set; }
         public string CreatedBy { get; set; }
